@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Textbox from './../components/Textbox'
 
 
 export default class Picker extends Component {
@@ -12,6 +13,10 @@ export default class Picker extends Component {
         flexDirection: 'column'
       }}>
         <h1>Picker Page</h1>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <Textbox></Textbox>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
         <Button onClick= {() => this.props.history.push("/results")}>Click to go to Results</Button>
       </div>
     );
