@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #MAKE SURE WE ADD CONFIGS TO THE APPS HERE WHEN MADE
-
+    'shows.apps.ShowsConfig',
     'rest_framework',
     'corsheaders',
 ]
