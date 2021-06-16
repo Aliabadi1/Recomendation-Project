@@ -52,31 +52,24 @@ def parseAnime(anime):
     lst_names.extend((str(synonyms[1]).split('/')[1][5:-4]).split(','))
     d["genres"] = lst
     d["score"] = score
-    d["relase_info"] = release_date
+    d["release_info"] = release_date
     d["rank"] = rank
     return d, lst_names
 
-def parseAll(x):
+def parsePage(x):
     d = {}
-    y = 0
     temp_link = "https://myanimelist.net/topanime.php?type=bypopularity&limit="
-    #doing top 1000
-    for i in range(x,20):
-        r = requests.get(temp_link + str(i) * 50)
-        soup = BeautifulSoup(r.content, "lxml")
-        for link in soup.find_all('a'):
-            temp = link.get('href')
-            if temp is not None:
-                reg = re.search("^https://myanimelist.net/anime/\d+/[^\/]+$", temp)
-                if reg is not None and reg.group is not None:
-                    try:
-                        tup = parseAnime(reg.group())
-                        d[tup[1][0]] = tup[0]
-                        for name in tup[1][1:]:
-                            d[name] = tup[1][0]
-                        print(d)
-                    except:
-                        return x+y
+    #parses a page
+    r = requests.get(temp_link + str(x))
+    soup = BeautifulSoup(r.content, "lxml")
+    for link in soup.find_all('a'):
+        temp = link.get('href')
+        if temp is not None:
+            reg = re.search("^https://myanimelist.net/anime/\d+/[^\/]+$", temp)
+            if reg is not None and reg.group is not None:
+                tup = parseAnime(reg.group())
+                for name in tup[1][:]:
+                    d[name] = tup[0]
+    return d
                     
-        y += 1
 
