@@ -33,7 +33,10 @@ def parseAnime(anime):
             score = td[0].find('div', class_='score-label score-5').text
         except:
             score = None
-    release_date = td[0].find('div', class_='information-block di-ib clearfix').text
+    try:
+        release_date = td[0].find('div', class_='information-block di-ib clearfix').text
+    except:
+        return None
     genres = soup.find_all('span', itemprop='genre')
     i = 0
     lst = []
@@ -51,9 +54,15 @@ def parseAnime(anime):
     lst_names.append(str(synonyms[0]).split('/')[1][5:-4])
     lst_names.extend((str(synonyms[1]).split('/')[1][5:-4]).split(','))
     d["genres"] = lst
-    d["score"] = score
+    if score is not None:
+        d["score"] = score
+    else:
+        d['score'] = 'tba'
     d["release_info"] = release_date
-    d["rank"] = rank
+    try:
+        d["rank"] = rank
+    except:
+        d["rank"] = 'TBA'
     return d, lst_names
 
 def parsePage(x):
@@ -68,6 +77,8 @@ def parsePage(x):
             reg = re.search("^https://myanimelist.net/anime/\d+/[^\/]+$", temp)
             if reg is not None and reg.group is not None:
                 tup = parseAnime(reg.group())
+                if tup is None:
+                    continue
                 for name in tup[1][:]:
                     d[name] = tup[0]
     return d
