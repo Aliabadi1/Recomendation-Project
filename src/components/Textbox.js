@@ -20,9 +20,11 @@ function Textbox() {
         <h1>Select Your Favourite Animes!</h1>
         <Form>
           <Form.Control type="text" value={fname} onChange={handleChange}/>
-          <Button onClick={handleClick}>Click To Save Anime</Button>  
+          <Button onClick={handleClick} variant="outline-primary">Click To Save Anime</Button>  
+          
         </Form>
-        <h5>{arr.map((goal) => <Alert variant='primary'>{goal}</Alert>)}</h5>
+        <br></br><br></br><br></br>
+        <h5>{arr.map((goal) => <Alert variant='info'>{goal}</Alert>)}</h5>
       </div>
     )
   }

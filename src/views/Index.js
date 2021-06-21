@@ -16,11 +16,12 @@
 
 */
 import React from "react";
-
+import Button from 'react-bootstrap/Button';
 // core components
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import PageHeader from "../components/PageHeader/PageHeader.js";
 import Footer from "../components/Footer/Footer.js";
+import Textbox from "../components/Textbox.js";
 import Basics from "../views/IndexSections/Basics.js";
 
 // sections for this page/view

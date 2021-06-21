@@ -19,6 +19,7 @@ import React from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
+import Textbox from "./../Textbox.js"
 
 export default function PageHeader() {
   return (
@@ -36,6 +37,7 @@ export default function PageHeader() {
           <h3 className="d-none d-sm-block">
             The best website for anime recommendations
           </h3>
+          <Textbox></Textbox>
         </div>
       </Container>
     </div>
