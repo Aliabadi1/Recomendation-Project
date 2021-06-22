@@ -11,7 +11,9 @@ function Textbox() {
     }
     const handleClick = e => {
         if(arr.length < 5){
+          if(!arr.includes(fname)){
             setarr(current => [...current, fname]);
+          }
         }
     }
   
@@ -25,6 +27,9 @@ function Textbox() {
         </Form>
         <br></br><br></br><br></br>
         <h5>{arr.map((goal) => <Alert variant='info'>{goal}</Alert>)}</h5>
+        <div>
+          <Button onClick ={() => setarr([])} variant="warning">Reset</Button>
+        </div>
       </div>
     )
   }
