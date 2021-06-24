@@ -15,8 +15,8 @@ import Index from "./views/Index.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/components" render={(props) => <Index {...props} />} />
-      <Redirect from="/" to="/components" />
+      <Route path="/main" render={(props) => <Index {...props} />} />
+      <Redirect from="/" to="/main" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
