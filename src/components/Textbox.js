@@ -8,6 +8,7 @@ class Textbox extends React.Component {
       fname: "",
       arr:[],
       shows:[],
+      results:[],
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -16,7 +17,48 @@ class Textbox extends React.Component {
   }
   
     handleSubmit(e){
-      
+      for(let i=0;i < this.state.arr.length; i++){
+        var curr;
+        for(let x=0; x < this.state.shows.length;x++){
+          if(this.state.arr[i] === this.state.shows[x].title.slice(1)){
+            curr = this.state.shows[x].genres.slice(1, this.state.shows[x].genres.length - 1);
+            curr = curr.split(',');
+            for(let a = 0; a < curr.length;a++){
+              if(curr[a][0] === "'"){
+                curr[a] = curr[a].slice(1, curr[a].length - 1);
+              }else{
+                curr[a] = curr[a].slice(2, curr[a].length - 1);
+              }
+            }
+            var temp = true;
+            for(let y = 0; y < this.state.shows.length; y++){
+              var recs = [];
+              var show;
+              // show = this.state.shows[y].genres.slice(1, this.state.shows[y].genres.length - 1);
+              // show = show.split(',');
+              // for(let a = 0; a < show.length;a++){
+              //   if(show[a][0] === "'"){
+              //     show[a] = show[a].slice(1, show[a].length - 1);
+              //   }else{
+              //     show[a] = show[a].slice(2, show[a].length - 1);
+              //   }
+              // }
+              // for(let z = 0; z < curr.length; z++){
+              //   if(!show.includes(curr[z])){
+              //     console.log(show, curr)
+              //     temp = false
+              //     break;
+              //   }
+              // }
+              if(this.state.shows[y].genres.indexOf(curr[0]) !== -1){
+                recs.push(this.state.shows[y]);
+              }
+            }
+            console.log(recs, curr[0]);
+          }
+          
+        }
+      }
     }
     handleChange(e){
       this.setState({fname:e.target.value});
@@ -26,8 +68,6 @@ class Textbox extends React.Component {
           if(!this.state.arr.includes(this.state.fname)){
             var temp = false;
             for(let x = 0; x < this.state.shows.length; x++){
-              console.log(this.state.shows[x].title);
-              console.log(this.state.fname);
               if(this.state.shows[x].title.slice(1) === this.state.fname){
                 temp = true;
               }
@@ -45,7 +85,6 @@ class Textbox extends React.Component {
       this.fetchtasks();
     }
     fetchtasks(){
-      console.log("testing testing")
       fetch('http://127.0.0.1:8000/shows/')
       .then(response => response.json())
       .then(data => this.setState({shows: data})
